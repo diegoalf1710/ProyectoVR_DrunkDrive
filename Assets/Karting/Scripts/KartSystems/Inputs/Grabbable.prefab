@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7094299113980401517}
   - component: {fileID: 8716948806980563193}
   m_Layer: 2
-  m_Name: ASAF
+  m_Name: Grabbable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
