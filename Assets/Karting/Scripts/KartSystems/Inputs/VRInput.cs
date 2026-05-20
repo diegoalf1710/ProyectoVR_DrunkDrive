@@ -11,6 +11,10 @@ namespace KartGame.KartSystems
         public float BrakeThreshold = 0.1f;
         public float TurnDeadzone = 0.1f;
 
+        [Header("Haptics")]
+        public float BrakeHapticAmplitude = 0.3f;
+        public float BrakeHapticDuration = 0.1f;
+
         private InputDevice _leftController;
 
         private void TryGetDevices()
@@ -29,24 +33,26 @@ namespace KartGame.KartSystems
         {
             TryGetDevices();
 
-            
             float trigger = 0f;
             _leftController.TryGetFeatureValue(CommonUsages.trigger, out trigger);
 
-            
             float grip = 0f;
             _leftController.TryGetFeatureValue(CommonUsages.grip, out grip);
 
-       
             Vector2 leftStick = Vector2.zero;
             _leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out leftStick);
 
             float turnInput = Mathf.Abs(leftStick.x) > TurnDeadzone ? leftStick.x : 0f;
 
+            bool brakePressed = grip > BrakeThreshold;
+
+            if (brakePressed)
+                _leftController.SendHapticImpulse(0, BrakeHapticAmplitude, BrakeHapticDuration);
+
             return new InputData
             {
                 Accelerate = trigger > AccelerateThreshold,
-                Brake = grip > BrakeThreshold,
+                Brake = brakePressed,
                 TurnInput = turnInput
             };
         }
