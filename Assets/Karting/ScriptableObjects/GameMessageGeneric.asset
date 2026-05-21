@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpawnCount: 1
   makeExtraCount: 3
+  returnToParentToReuse: 0
   poolObject: {fileID: 3003312392959327722, guid: dbfc7742a2f49bf42a9a012e4ec4b773,
     type: 3}
-  pool: []
